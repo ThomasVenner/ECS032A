@@ -1,0 +1,42 @@
+
+
+class ItemToPurchase:
+    """ A class that represents an item to purchase for an eCommerce site"""
+    def __init__(self):     # Class constructor
+        self.item_name = "none"
+        self.item_price = 0.00
+        self.item_quantity = 0
+    def print_item_cost(self):
+        item_cost = self.item_price * float(self.item_quantity)
+        print(f'{self.item_name} {self.item_quantity} @ ${self.item_price:.2f} = ${item_cost:.2f}')
+
+        
+if __name__ == "__main__":
+    i = 0
+    total_cost = 0
+    item_list = []
+    while i < 2:
+        print(f"Item {i+1}")
+        item_name = input("Enter the item name:\n")
+        item_price = float(input("Enter the item price:\n"))
+        item_quantity = int(input("Enter the item quantity:\n"))
+        
+        item_list.append(ItemToPurchase()) 
+
+        item_list[i].item_name = item_name
+        item_list[i].item_price = item_price
+        item_list[i].item_quantity = item_quantity
+        item_list[i].print_item_cost()
+        
+        
+        total_cost += item_list[i].item_price * float(item_list[i].item_quantity)
+        print()
+        i += 1
+
+    print("TOTAL COST")
+    i = 0
+    while i < 2:
+        item_list[i].print_item_cost()
+        i +=1
+    print()
+    print(f'Total: ${total_cost:.2f}')
