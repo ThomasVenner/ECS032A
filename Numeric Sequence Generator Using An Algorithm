@@ -1,0 +1,73 @@
+import sys 
+
+num = input("Enter a positive integer or q to quit:\n")
+
+while num != 'q': #largest loop executes program until user enters q
+    break_out_flag = False #defining a variable that I will use to break out of 2 nested loops
+    while num.isnumeric() == False: #this loop deals with any non positive integer input except 0, and makes sure to quit if q is entered
+        print("You entered something that was not a positive integer") 
+        num = input("Enter a positive integer or q to quit:\n")
+        
+        if num == 'q':
+            sys.exit() #ends the program
+            
+    while num.isnumeric() == True: #deals with numeric user input
+        
+        num = int(num)
+        
+        if num == 0: #if user input is true, causes break flag to be True, and the while num.isnumeric() True loop to exit
+            print("You entered something that was not a positive integer")
+            num = input("Enter a positive integer or q to quit:\n")
+            break_out_flag == True
+            break
+
+        if break_out_flag:
+            break
+        
+        if num == 1: #if and elif statements deals with whitespace and other formatting if the first number entered is 1
+            print(num, end ='\n')
+        elif num != 1:    
+            print(f'{num:,}', end='\t')
+        
+        i = 2
+        while num != 1: #the inner loop containing the algorithm
+            
+            if i < 10: #formatting for outputted numbers before 10 numbers are outputted on a line
+                if num % 2 == 0:
+                    num = int(num/2)
+                else:
+                    num = int(3*num + 1)
+
+                  
+                if num >= 1000:
+                    print(f'{num:,}', end = '\t')  
+                elif num == 1: #makes sure to cause a newline to be printed instead of a tab if the calculated number is 1 
+                    print(num, end = '\n')
+                else:
+                    print(num, end = '\t')
+                
+                    
+                
+
+                i+=1
+            elif i == 10: #deals with formatting when the 10th number of the line is reached
+                
+                if num % 2 == 0:
+                    num = int(num/2)
+                else:
+                    num = int(3*num + 1)
+                  
+                if num >= 1000: #makes sure to put commas if the number if 1000 or greater
+                    print(f'{num:,}\t',  end = '\n')
+                elif num == 1:
+                    print(num, end = '\n')
+                else:
+                    print(f'{num}\t', end= '\n')
+
+                i = 1
+        break #breaks out of the while num.isnumeric() = True loop to avoid type error when trying num.isnumeric() where num is now an int
+
+    
+    print()
+    num = input("Enter a positive integer or q to quit:\n")
+        
