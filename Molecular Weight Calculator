@@ -1,0 +1,61 @@
+# initialize the count of each variable to be 0
+C = 0
+H = 0
+O = 0
+
+#initialize the iterative variable to be 0
+i = 0
+
+m_formula = input("Enter a chemical formula, or just the enter key to quit: ")
+
+#run the loop unless the user inputs enter
+while m_formula != '':
+    # initialize the count of each variable to be 0
+    C = 0
+    H = 0
+    O = 0
+
+    #initialize the iterative variable to be 0
+    i = 0
+
+    #make sure to make i less than length to avoid indexing past string length error
+    while i < len(m_formula):
+        chemical = m_formula[i] 
+        if not chemical in {"H", "C", "O"}: #dealing with bad formula (if number inputted first or lower case letter, will read this message)
+            print("Badly formed molecular formula; try again.")
+            break
+            
+        
+        i += 1 #add the iterative variable for the while loop
+        number = '' #initialize the number variable as an empty string
+
+        while i < len(m_formula) and m_formula[i].isdecimal(): #deals with if next string character is integer
+            number = number + m_formula[i] #adds the string character to variable number
+            i += 1
+
+        if number == '': #if no number was added, it is implied that the number is 1
+            number = 1
+
+        else:
+            number = int(number) #if a number was added, make the added together string of characters into a number
+            
+
+        if chemical == "H": #this section adds up the numbers according to the atoms they correspond to
+            H = H + number
+        elif chemical == "C":
+            C = C + number
+        elif chemical == "O":
+            O = O + number
+            
+    if not chemical in {"H", "C", "O"}:
+        m_formula = input("Enter a chemical formula, or just the enter key to quit: ")
+
+    else:
+        weight = H * 1.0079 + C * 12.0110 + O * 15.9994 #computes the molecular weight
+        print("The molecular weight is", f'{weight:.4f}') #print resulted formatted with 4 decimal points, and then ask for another formula within the "if user hasn't pressed enter" loop
+        m_formula = input("Enter a chemical formula, or just the enter key to quit: ")
+
+    
+    
+
+    
