@@ -1,0 +1,101 @@
+def print_menu():
+    print()
+    print('MENU')
+    print('a - Add player')
+    print('d - Remove player')
+    print('u - Update player rating')
+    print('r - Output players above a rating')
+    print('o - Output roster')
+    print('q - Quit')
+    print()
+
+def add_player():
+    new_jersey = int(input('Enter a new player\'s jersey number:\n'))
+    new_rating = int(input('Enter the player\'s rating:\n'))
+    new_player = {new_jersey: new_rating}
+    global jersey_rating
+    global jersey_rating_list
+    jersey_rating.update(new_player)
+    jersey_rating_list = list(jersey_rating.keys())
+    jersey_rating_list.sort()
+    
+    
+def output_roster():
+    print('ROSTER')
+    for jersey in jersey_rating_list:
+        print(f'Jersey number: {jersey}, Rating: {jersey_rating[jersey]}')
+
+def delete_player():
+    deleted_player = int(input('Enter a jersey number:\n'))
+    global jersey_rating
+    global jersey_rating_list
+    jersey_rating.pop(deleted_player)
+    jersey_rating_list = list(jersey_rating.keys())
+    jersey_rating_list.sort()
+        
+def update_player_rating():
+    update_player = int(input('Enter a new player\'s jersey number:\n'))
+    new_rating = int(input('Enter the player\'s rating:\n'))
+    updated_player = {update_player: new_rating}
+    global jersey_rating
+    global jersey_rating_list
+    jersey_rating.update(updated_player)
+    jersey_rating_list = list(jersey_rating.keys())
+    jersey_rating_list.sort()
+
+def output_players_above_a_rating():
+    entered_rating = int(input('Enter a rating:\n'))
+    print()
+    above_jersey_rating = {}
+    global jersey_rating
+    
+    for jersey, rating in jersey_rating.items():
+        if jersey_rating[jersey] > entered_rating:
+            above_jersey_rating[jersey] = rating
+            
+    above_jersey_rating_list = list(above_jersey_rating.keys())
+    above_jersey_rating_list.sort()
+    print(f'ABOVE {entered_rating}')
+    for jersey in above_jersey_rating_list:
+        print(f'Jersey number: {jersey}, Rating: {above_jersey_rating[jersey]}')
+        
+        
+    
+
+    
+
+i = 1
+jersey_rating = {}
+while i <= 5:
+    jersey = int(input(f'Enter player {i}\'s jersey number:\n'))
+    rating = int(input(f'Enter player {i}\'s rating:\n'))
+    print()
+    jersey_rating[jersey] = rating
+    i += 1
+    
+jersey_rating_list = list(jersey_rating.keys())
+jersey_rating_list.sort()
+
+print('ROSTER')
+for jersey in jersey_rating_list:
+    print(f'Jersey number: {jersey}, Rating: {jersey_rating[jersey]}')
+
+print_menu()
+cmd = input('Choose an option:\n')
+
+
+while cmd != 'q':
+    if cmd == 'o':
+        output_roster()
+    elif cmd == 'a':
+        add_player()
+    elif cmd == 'd':
+        delete_player()
+    elif cmd == 'u':
+        update_player_rating()
+    elif cmd == 'r':
+        output_players_above_a_rating()
+    print_menu()
+    cmd = input('Choose an option:\n')
+
+
